@@ -15,7 +15,7 @@ namespace Ping
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "ping")] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Function Ping called");
+            log.LogInformation("Static Function Ping called");
             return (ActionResult)new OkObjectResult($"Ping - Updated - {DateTime.Now.ToShortDateString()}");
         }
     }
