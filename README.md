@@ -1,5 +1,6 @@
 # azure
 
+Used to migrate web app into functions and api gateway.
 Used to play with azure dev ops and integration with github.
 Creating builds for all branches.
 Checking validation of pull requests.
