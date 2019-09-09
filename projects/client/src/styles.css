@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+html, body { 
+    height: 100vh; 
+}
+body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+.mat-icon {
+    vertical-align: middle;
+}
+@media (min-width:577px) {
+    .mat-card {
+        margin: 10px 10px 10px;
+        padding:0 16px;
+    }
+    .app-title {
+        visibility: block;
+        vertical-align: middle
+    }
+    .app-title-short {
+        display: none;
+    }  
+}
+@media (max-width: 576px) {
+    .mat-card {
+        margin: 0px;
+        padding:0px !important;
+    }
+    a.app-title {
+        display: none;
+    }
+    .app-title {
+        display: none;
+    }
+    .app-title-short {
+        visibility: block;
+        vertical-align: middle
+    }
+}

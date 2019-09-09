@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BaseTest\BaseTest.csproj" />
-    <ProjectReference Include="..\projects\server\Ping\Ping.csproj" />
+    <ProjectReference Include="..\Ping\Ping.csproj" />
+    <ProjectReference Include="..\test\BaseTest\BaseTest.csproj" />
   </ItemGroup>
 
 </Project>
