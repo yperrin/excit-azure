@@ -19,6 +19,11 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -30,14 +35,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
 - script: npm install
   workingDirectory: ./projects/client
   displayName: 'npm install'
+
+- script: npx ng build --prod --progress=false
+  workingDirectory: ./projects/client
+  displayName: 'Build client'
 
 - task: VSTest@2
   inputs:
@@ -52,6 +56,19 @@ steps:
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.1'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+  displayName: 'Run Visual Studio Tests'
+
+- script: npx ng test --karmaConfig karma.conf.ci.js --watch=false
+  workingDirectory: ./projects/client
+  displayName: 'Run angular tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    # Make sure you've changed testResultsFiles to the one below 
+    testResultsFiles: './projects/client/**/TESTS-*.xml'
+  displayName: 'Publish Test Results'
 
 - task: VSBuild@1
   inputs:
@@ -59,6 +76,7 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\Ping.zip"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+  displayName: 'Build Serverless Function Ping'
 
 - task: PublishBuildArtifacts@1
   inputs:
