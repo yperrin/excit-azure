@@ -67,7 +67,7 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     # Make sure you've changed testResultsFiles to the one below 
-    testResultsFiles: './projects/client/**/TESTS-*.xml'
+    testResultsFiles: '**/TESTS-*.xml'
   displayName: 'Publish Test Results'
 
 - task: VSBuild@1
